@@ -3,6 +3,8 @@ package Proyecto.Domain.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "aplicacion")
 @Getter
@@ -50,7 +52,7 @@ public class Aplicacion {
     private String licencia;
 
     @Column(nullable = false, precision = 10, scale = 2)
-    private Double precio;
+    private BigDecimal precio;
 
     @Column(columnDefinition = "TEXT")
     private String descripcion;
@@ -69,10 +71,10 @@ public class Aplicacion {
     private Usuario usuario;
 
     public Aplicacion(String nombre, String proveedor, String categoria, String lenguajePrincipal,
-                     String lenguajeSecundario, Boolean usaBd, Boolean requiereConexionRed,
-                     Integer numBits, String sistemaOperativo, String requisitosHardware,
-                     String licencia, Double precio, String descripcion, String web,
-                     String correo, String tamanoInstalador) {
+                      String lenguajeSecundario, Boolean usaBd, Boolean requiereConexionRed,
+                      Integer numBits, String sistemaOperativo, String requisitosHardware,
+                      String licencia, BigDecimal precio, String descripcion, String web,
+                      String correo, String tamanoInstalador) {
         this.nombre = nombre;
         this.proveedor = proveedor;
         this.categoria = categoria;
