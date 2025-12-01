@@ -10,8 +10,6 @@ public interface UsuarioServiceport {
 
     Optional<Usuario> buscarPorId(Long id);
 
-    Optional<Usuario> buscarPorClave(String clave);
-
     List<Usuario> listarTodos();
 
     List<Usuario> listarPorRol(String rol);
@@ -19,6 +17,4 @@ public interface UsuarioServiceport {
     Usuario actualizar(Long id, Usuario usuario);
 
     void eliminar(Long id);
-
-    boolean existePorClave(String clave);
 }
