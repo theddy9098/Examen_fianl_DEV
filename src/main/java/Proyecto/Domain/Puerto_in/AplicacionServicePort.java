@@ -1,22 +1,21 @@
 package Proyecto.Domain.Puerto_in;
 
-import Proyecto.Domain.Entity.Usuario;
+import Proyecto.Domain.Entity.Aplicacion;
+
 
 import java.util.List;
 import java.util.Optional;
 
 public interface AplicacionServicePort {
-    Usuario crear(Usuario usuario);
+    Aplicacion crear(Aplicacion aplicacion);  // ← Era Usuario
 
-    Optional<Usuario> buscarPorId(Long id);
+    Optional<Aplicacion> buscarPorId(Long id);  // ← Era Usuario
 
-    Optional<Usuario> buscarPorClave(String clave);
+    List<Aplicacion> listarTodas();  // ← Era Usuario
 
-    List<Usuario> listarTodos();
+    List<Aplicacion> listarPorUsuario(Long usuarioId);
 
-    List<Usuario> listarPorRol(String rol);
-
-    Usuario actualizar(Long id, Usuario usuario);
+    Aplicacion actualizar(Long id, Aplicacion aplicacion);  // ← Era Usuario
 
     void eliminar(Long id);
 
