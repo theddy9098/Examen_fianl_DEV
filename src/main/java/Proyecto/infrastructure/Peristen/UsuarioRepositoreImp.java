@@ -1,7 +1,6 @@
 package Proyecto.infrastructure.Peristen;
 
 import Proyecto.Domain.Entity.Usuario;
-import Proyecto.Domain.Puerto_in.UsuarioServiceport;
 import Proyecto.Domain.Puerto_out.UsuarioRepositoryPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -11,15 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
-public class UsuarioRepositoreImp implements UsuarioServiceport {
+public class UsuarioRepositoreImp implements UsuarioRepositoryPort {
     @Inject
     UsuarioRepositoryPort UsuarioRepository;
 
     @Override
     @Transactional
-    public Usuario crear(Usuario usuario) {
-
-
+    public Usuario guardar(Usuario usuario) {
         // Validar campos obligatorios
         if (usuario.getClave() == null || usuario.getClave().trim().isEmpty()) {
             throw new IllegalArgumentException("La clave es obligatoria");
@@ -38,7 +35,6 @@ public class UsuarioRepositoreImp implements UsuarioServiceport {
     public Optional<Usuario> buscarPorId(Long id) {
         return UsuarioRepository.buscarPorId(id);
     }
-
 
     @Override
     public List<Usuario> listarTodos() {
