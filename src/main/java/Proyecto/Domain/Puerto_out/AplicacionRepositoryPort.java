@@ -14,7 +14,9 @@ public interface AplicacionRepositoryPort {
 
     List<Aplicacion> listarPorUsuario(Long usuarioId);
 
+    Aplicacion actualizar(Long id, Aplicacion aplicacion);
+
     void eliminar(Long id);
 
-    boolean existe(Long id);
+
 }

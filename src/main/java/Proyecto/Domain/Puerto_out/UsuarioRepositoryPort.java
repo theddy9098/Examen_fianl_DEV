@@ -14,6 +14,8 @@ public interface UsuarioRepositoryPort {
 
     List<Usuario> listarPorRol(String rol);
 
+    Usuario actualizar(Long id, Usuario usuario);
+
     void eliminar(Long id);
 
 
