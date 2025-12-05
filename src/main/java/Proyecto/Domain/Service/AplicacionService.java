@@ -1,8 +1,10 @@
 package Proyecto.Domain.Service;
 
 import Proyecto.Domain.Entity.Aplicacion;
+import Proyecto.Domain.Entity.Usuario;
 import Proyecto.Domain.Puerto_in.AplicacionServicePort;
 import Proyecto.Domain.Puerto_out.AplicacionRepositoryPort;
+import Proyecto.Domain.Puerto_out.UsuarioRepositoryPort;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -14,6 +16,9 @@ import java.util.Optional;
 public class AplicacionService implements AplicacionServicePort {
     @Inject
     AplicacionRepositoryPort aplicacionRepository;
+
+    @Inject
+    UsuarioRepositoryPort usuarioRepository;
 
     @Override
     @Transactional
@@ -44,7 +49,32 @@ public class AplicacionService implements AplicacionServicePort {
     public Aplicacion actualizar(Long id, Aplicacion aplicacion) {
         Aplicacion aplicacionExistente = aplicacionRepository.buscarPorId(id)
                 .orElseThrow(() -> new IllegalArgumentException("Aplicación no encontrada"));
+
+        // ✅ CORREGIR: Validar y cargar el usuario completo
+        if (aplicacion.getUsuario() != null && aplicacion.getUsuario().getId() != null) {
+            Usuario usuarioCompleto = usuarioRepository.buscarPorId(aplicacion.getUsuario().getId())
+                    .orElseThrow(() -> new IllegalArgumentException("El usuario no existe"));
+            aplicacionExistente.setUsuario(usuarioCompleto);  // ← Usar el usuario completo
+        }
+
+        // Actualizar todos los campos
         aplicacionExistente.setNombre(aplicacion.getNombre());
+        aplicacionExistente.setProveedor(aplicacion.getProveedor());
+        aplicacionExistente.setCategoria(aplicacion.getCategoria());
+        aplicacionExistente.setLenguajePrincipal(aplicacion.getLenguajePrincipal());
+        aplicacionExistente.setLenguajeSecundario(aplicacion.getLenguajeSecundario());
+        aplicacionExistente.setUsaBd(aplicacion.getUsaBd());
+        aplicacionExistente.setRequiereConexionRed(aplicacion.getRequiereConexionRed());
+        aplicacionExistente.setNumBits(aplicacion.getNumBits());
+        aplicacionExistente.setSistemaOperativo(aplicacion.getSistemaOperativo());
+        aplicacionExistente.setRequisitosHardware(aplicacion.getRequisitosHardware());
+        aplicacionExistente.setLicencia(aplicacion.getLicencia());
+        aplicacionExistente.setPrecio(aplicacion.getPrecio());
+        aplicacionExistente.setDescripcion(aplicacion.getDescripcion());
+        aplicacionExistente.setWeb(aplicacion.getWeb());
+        aplicacionExistente.setCorreo(aplicacion.getCorreo());
+        aplicacionExistente.setTamanoInstalador(aplicacion.getTamanoInstalador());
+
         return aplicacionRepository.guardar(aplicacionExistente);
     }
 

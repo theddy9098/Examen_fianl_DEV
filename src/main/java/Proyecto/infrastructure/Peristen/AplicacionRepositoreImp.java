@@ -50,21 +50,6 @@ public class AplicacionRepositoreImp  implements AplicacionRepositoryPort {
                 .getResultList();
     }
 
-    @Override
-    @Transactional
-    public Aplicacion actualizar(Long id, Aplicacion aplicacion) {
-        Aplicacion aplicacionExistente = entityManager.find(Aplicacion.class, id);
-        if (aplicacionExistente == null) {
-            throw new IllegalArgumentException("Aplicación no encontrada");
-        }
-
-        if (aplicacion.getNombre() != null && !aplicacion.getNombre().trim().isEmpty()) {
-            aplicacionExistente.setNombre(aplicacion.getNombre());
-        }
-        
-        return entityManager.merge(aplicacionExistente);
-    }
-
 
     @Override
     public void eliminar(Long id) {
