@@ -20,6 +20,10 @@ public class AplicacionService implements AplicacionServicePort {
     @Inject
     UsuarioRepositoryPort usuarioRepository;
 
+    public AplicacionService(AplicacionRepositoryPort repository) {
+
+    }
+
     @Override
     @Transactional
     public Aplicacion crear(Aplicacion aplicacion) {
@@ -50,11 +54,11 @@ public class AplicacionService implements AplicacionServicePort {
         Aplicacion aplicacionExistente = aplicacionRepository.buscarPorId(id)
                 .orElseThrow(() -> new IllegalArgumentException("Aplicación no encontrada"));
 
-        // ✅ CORREGIR: Validar y cargar el usuario completo
+
         if (aplicacion.getUsuario() != null && aplicacion.getUsuario().getId() != null) {
             Usuario usuarioCompleto = usuarioRepository.buscarPorId(aplicacion.getUsuario().getId())
                     .orElseThrow(() -> new IllegalArgumentException("El usuario no existe"));
-            aplicacionExistente.setUsuario(usuarioCompleto);  // ← Usar el usuario completo
+            aplicacionExistente.setUsuario(usuarioCompleto);
         }
 
         // Actualizar todos los campos

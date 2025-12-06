@@ -15,6 +15,10 @@ public class UsuarioService implements UsuarioServiceport {
     @Inject
     UsuarioRepositoryPort usuarioRepository;
 
+    public UsuarioService(UsuarioRepositoryPort repository) {
+
+    }
+
     @Override
     @Transactional
     public Usuario crear(Usuario usuario) {
